@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Book Service - Larry's Chevron | Nampa, ID</title>
+    <meta name="description" content="Schedule your auto service appointment with Larry's Chevron in Nampa, Idaho. Fast, reliable, full-service repair shop." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0072CE",
+                        secondary: "#D41E2D",
+                        "primary-dark": "#005fa8",
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#111827",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "border-light": "#E2E8F0",
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.375rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .step-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .step-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .mobile-menu.open {
+            max-height: 400px;
+        }
+        .service-option input:checked + div {
+            border-color: #0072CE;
+            background-color: #EFF6FF;
+            box-shadow: 0 0 0 2px #0072CE;
+        }
+        @keyframes successPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-pop {
+            animation: successPop 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-text-light font-sans min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-surface-light/95 backdrop-blur-sm border-b border-gray-200 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2">
+                    <img src="/images/logo.png" alt="Larry's Chevron" class="h-14 w-auto" />
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/">Home</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#services">Services</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#about">About Us</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#contact">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuToggle" class="text-gray-600 hover:text-primary focus:outline-none" aria-label="Toggle menu">
+                        <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/">Home</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#services">Services</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#about">About Us</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col lg:flex-row max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 gap-8">
+        <div class="flex-grow lg:w-2/3">
+            <!-- Header & Progress -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2 font-display uppercase">Schedule Service</h1>
+                <p class="text-gray-500">Complete the steps below to book your appointment with our expert technicians.</p>
+                <div class="mt-6 relative">
+                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                        <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary transition-all duration-500 ease-out" id="progress-bar" style="width: 25%"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] sm:text-xs font-medium text-gray-500" id="step-labels">
+                        <span class="text-primary font-bold" data-step="1">1. Service</span>
+                        <span data-step="2">2. Date</span>
+                        <span data-step="3">3. Vehicle</span>
+                        <span data-step="4">4. Details</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard Card -->
+            <div class="bg-surface-light rounded-xl shadow-lg border border-border-light p-4 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[500px] relative">
+
+                <!-- Step 1: Service Selection -->
+                <div class="step-content active" id="step-1">
+                    <h2 class="text-xl font-semibold mb-6 text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">build</span> Select Service Required
+                    </h2>
+                    <p class="text-sm text-gray-500 mb-4">Select <strong>one</strong> service per appointment. Each appointment is a 30-minute slot.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="service-option cursor-pointer">
+                            <input class="sr-only" name="service" type="radio" value="Oil Change" data-price="49.99" />
+                            <div class="flex items-start p-4 rounded-lg border border-border-light hover:border-primary hover:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mr-3 mt-0.5">oil_barrel</span>
+                                <div class="flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Oil Change</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Full synthetic or conventional oil, filter replacement, and fluid top-off.</span>
+                                    <span class="block text-sm font-bold text-gray-900 mt-2">$49.99+</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="service-option cursor-pointer">
+                            <input class="sr-only" name="service" type="radio" value="Brake Inspection" data-price="0" />
+                            <div class="flex items-start p-4 rounded-lg border border-border-light hover:border-primary hover:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mr-3 mt-0.5">speed</span>
+                                <div class="flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Brake Inspection</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Full brake system check including pads, rotors, and fluid levels.</span>
+                                    <span class="block text-sm font-bold text-green-700 mt-2">Free Inspection</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="service-option cursor-pointer">
+                            <input class="sr-only" name="service" type="radio" value="Leak Inspection" data-price="0" />
+                            <div class="flex items-start p-4 rounded-lg border border-border-light hover:border-primary hover:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mr-3 mt-0.5">water_drop</span>
+                                <div class="flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Leak Inspection</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Identify and diagnose fluid leaks including oil, coolant, and transmission fluid.</span>
+                                    <span class="block text-sm font-bold text-green-700 mt-2">Free Inspection</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="service-option cursor-pointer">
+                            <input class="sr-only" name="service" type="radio" value="Trip Check" data-price="0" />
+                            <div class="flex items-start p-4 rounded-lg border border-border-light hover:border-primary hover:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mr-3 mt-0.5">route</span>
+                                <div class="flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Trip Check</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Multi-point inspection to make sure your vehicle is road-trip ready.</span>
+                                    <span class="block text-sm font-bold text-green-700 mt-2">Free Inspection</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3">
+                        <span class="material-symbols-outlined text-amber-600 mt-0.5">info</span>
+                        <div>
+                            <p class="text-sm font-medium text-amber-800">Need diagnostics, major repairs, or something more complex?</p>
+                            <p class="text-sm text-amber-700 mt-1">Please call us directly at <a href="tel:2084667314" class="font-bold underline">(208) 466-7314</a> so we can properly assess your vehicle's needs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Date & Time -->
+                <div class="step-content" id="step-2">
+                    <h2 class="text-xl font-semibold mb-6 text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">event</span> Select Date &amp; Time
+                    </h2>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="w-full md:w-1/2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
+                            <input type="date" id="appointmentDate" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-gray-900 p-3" />
+                            <p class="text-xs text-gray-400 mt-2">We are open Monday – Friday, 8am – 5pm.</p>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Available Times</label>
+                            <div class="grid grid-cols-2 gap-3" id="timeSlots">
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">8:00 AM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">9:00 AM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">10:00 AM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">11:00 AM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">1:00 PM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">2:00 PM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">3:00 PM</button>
+                                <button type="button" class="time-slot py-3 px-4 rounded border border-border-light text-gray-700 hover:border-primary hover:text-primary text-sm transition-colors">4:00 PM</button>
+                            </div>
+                            <div class="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-xs text-yellow-800">
+                                <span class="font-bold">Note:</span> Drop-offs are welcome anytime before 9am.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Vehicle Info -->
+                <div class="step-content" id="step-3">
+                    <h2 class="text-xl font-semibold mb-6 text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">directions_car</span> Vehicle Information
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="year">Year</label>
+                            <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="year">
+                                <option value="">Select year...</option>
+                                <script>
+                                    const yearSelect = document.currentScript.parentElement;
+                                    for (let y = 2026; y >= 1990; y--) {
+                                        yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="make">Make</label>
+                            <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="make">
+                                <option value="">Select make...</option>
+                                <option>Toyota</option>
+                                <option>Honda</option>
+                                <option>Ford</option>
+                                <option>Chevrolet</option>
+                                <option>Dodge/Ram</option>
+                                <option>GMC</option>
+                                <option>Nissan</option>
+                                <option>Subaru</option>
+                                <option>Hyundai</option>
+                                <option>Kia</option>
+                                <option>BMW</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="model">Model</label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="model" placeholder="e.g. Camry, F-150, Civic" type="text" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="mileage">Approx. Mileage</label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="mileage" placeholder="e.g. 45000" type="number" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700" for="notes">Describe the issue (Optional)</label>
+                            <textarea class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="notes" placeholder="Any strange noises, warning lights, or specific symptoms?" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contact Details -->
+                <div class="step-content" id="step-4">
+                    <h2 class="text-xl font-semibold mb-6 text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">person</span> Your Contact Details
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="first-name">First Name <span class="text-red-500">*</span></label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="first-name" type="text" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="last-name">Last Name <span class="text-red-500">*</span></label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="last-name" type="text" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="email">Email Address <span class="text-red-500">*</span></label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="email" type="email" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" for="phone">Phone Number <span class="text-red-500">*</span></label>
+                            <input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" id="phone" type="tel" placeholder="(208) 555-1234" required />
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded" id="sms-updates" type="checkbox" />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label class="font-medium text-gray-700" for="sms-updates">Send me text updates about my repair status</label>
+                                    <p class="text-gray-500">We'll only use this for your appointment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success State -->
+                <div class="step-content" id="step-success">
+                    <div class="flex flex-col items-center justify-center py-12 text-center success-pop">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-green-600 text-5xl">check_circle</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Booking Request Sent!</h2>
+                        <p class="text-gray-500 max-w-md mb-6">Thank you! We'll confirm your appointment shortly via phone or email. If you need immediate assistance, give us a call.</p>
+                        <a href="tel:2084667314" class="inline-flex items-center gap-2 bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined">call</span>
+                            (208) 466-7314
+                        </a>
+                        <a href="/" class="mt-4 text-primary hover:underline font-medium text-sm">&larr; Back to Home</a>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border-light flex justify-between" id="wizard-nav">
+                    <button class="bg-white border border-gray-300 text-gray-700 py-3 px-5 sm:px-6 rounded-md shadow-sm text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary hidden" id="prevBtn" type="button">
+                        Back
+                    </button>
+                    <button class="ml-auto bg-primary border border-transparent rounded-md shadow-sm py-3 px-5 sm:px-6 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" id="nextBtn" type="button">
+                        Next Step
+                    </button>
+                    <button class="ml-auto bg-green-600 border border-transparent rounded-md shadow-sm py-3 px-5 sm:px-6 inline-flex justify-center text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 hidden" id="submitBtn" type="button">
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Summary (compact, visible only on small screens) -->
+        <div class="lg:hidden bg-surface-light rounded-xl shadow border border-border-light p-4" id="mobile-summary">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3 text-sm">
+                    <span class="font-bold text-gray-900" id="mobile-summary-service">No service selected</span>
+                    <span class="text-gray-400">|</span>
+                    <span class="font-bold text-primary" id="mobile-summary-total">$0.00</span>
+                </div>
+                <a href="tel:2084667314" class="text-primary hover:text-blue-700 flex items-center gap-1 text-xs font-medium">
+                    <span class="material-symbols-outlined text-base">call</span>
+                    Call
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar Summary -->
+        <div class="lg:w-1/3 hidden lg:block">
+            <div class="bg-surface-light rounded-xl shadow-lg border border-border-light p-6 sticky top-24">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center justify-between font-display uppercase">
+                    Booking Summary
+                    <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded" id="summary-status">Draft</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="pb-4 border-b border-border-light">
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Services</p>
+                        <div id="summary-services">
+                            <p class="text-sm text-gray-400 italic">No services selected yet</p>
+                        </div>
+                    </div>
+                    <div class="pb-4 border-b border-border-light">
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Appointment</p>
+                        <div class="flex items-center text-sm text-gray-700" id="summary-datetime">
+                            <span class="material-symbols-outlined text-base mr-2 text-primary">calendar_today</span>
+                            <span class="text-gray-400 italic">Not selected</span>
+                        </div>
+                    </div>
+                    <div class="pb-4 border-b border-border-light">
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Vehicle</p>
+                        <div class="flex items-center text-sm text-gray-700" id="summary-vehicle">
+                            <span class="material-symbols-outlined text-base mr-2 text-primary">directions_car</span>
+                            <span class="text-gray-400 italic">Not entered</span>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm text-gray-600">Subtotal</span>
+                            <span class="text-sm font-medium text-gray-900" id="summary-subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-600">Est. Taxes</span>
+                            <span class="text-sm font-medium text-gray-900" id="summary-tax">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-blue-50 p-3 rounded-lg">
+                            <span class="font-bold text-gray-900">Total Estimate</span>
+                            <span class="font-bold text-xl text-primary" id="summary-total">$0.00</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2 text-center">Final price may vary based on vehicle needs.</p>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-border-light">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-primary/10 p-2 rounded-full">
+                            <span class="material-symbols-outlined text-primary">phone_in_talk</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Need help booking?</p>
+                            <a href="tel:2084667314" class="font-bold text-gray-900 text-sm hover:text-primary transition-colors">Call (208) 466-7314</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-border-light mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="/" class="font-display font-bold text-lg text-gray-900 hover:text-primary transition-colors">Larry's Chevron</a>
+                    <p class="text-sm text-gray-500 mt-1">Serving Nampa, Idaho for over 30 years.</p>
+                </div>
+                <div class="flex space-x-6 text-sm text-gray-500">
+                    <a class="hover:text-primary" href="#">Privacy Policy</a>
+                    <a class="hover:text-primary" href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="mt-4 text-center text-xs text-gray-400">
+                &copy; 2026 Larry's Chevron. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Mobile menu =====
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            menuIcon.textContent = mobileMenu.classList.contains('open') ? 'close' : 'menu';
+        });
+
+        // ===== Wizard Logic =====
+        let currentStep = 1;
+        const totalSteps = 4;
+        const progressBar = document.getElementById('progress-bar');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const wizardNav = document.getElementById('wizard-nav');
+        const stepLabels = document.querySelectorAll('#step-labels span');
+
+        let selectedServices = [];
+        let selectedDate = '';
+        let selectedTime = '';
+
+        function updateUI() {
+            const progress = (currentStep / totalSteps) * 100;
+            progressBar.style.width = progress + '%';
+
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            const activeStep = document.getElementById('step-' + currentStep);
+            if (activeStep) activeStep.classList.add('active');
+
+            prevBtn.classList.toggle('hidden', currentStep === 1);
+            nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+            submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+
+            stepLabels.forEach(label => {
+                const step = parseInt(label.dataset.step);
+                label.classList.toggle('text-primary', step <= currentStep);
+                label.classList.toggle('font-bold', step <= currentStep);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        });
+
+        submitBtn.addEventListener('click', () => {
+            // Show success
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-success').classList.add('active');
+            wizardNav.classList.add('hidden');
+            progressBar.style.width = '100%';
+            document.getElementById('summary-status').textContent = 'Submitted';
+            document.getElementById('summary-status').classList.remove('bg-gray-100', 'text-gray-500');
+            document.getElementById('summary-status').classList.add('bg-green-100', 'text-green-700');
+            stepLabels.forEach(l => { l.classList.add('text-primary', 'font-bold'); });
+        });
+
+        // ===== Service Selection (radio - one at a time) =====
+        document.querySelectorAll('.service-option input').forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateSummary();
+            });
+        });
+
+        // ===== Time Slot Selection =====
+        document.querySelectorAll('.time-slot').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.time-slot').forEach(b => {
+                    b.classList.remove('border-primary', 'bg-blue-50', 'text-primary', 'font-medium', 'shadow-sm', 'ring-1', 'ring-primary');
+                });
+                btn.classList.add('border-primary', 'bg-blue-50', 'text-primary', 'font-medium', 'shadow-sm', 'ring-1', 'ring-primary');
+                selectedTime = btn.textContent.trim();
+                updateSummary();
+            });
+        });
+
+        // ===== Date Selection =====
+        const dateInput = document.getElementById('appointmentDate');
+        // Set min date to today
+        const today = new Date();
+        dateInput.min = today.toISOString().split('T')[0];
+        dateInput.addEventListener('change', () => {
+            selectedDate = dateInput.value;
+            updateSummary();
+        });
+
+        // ===== Vehicle Fields =====
+        ['year', 'make', 'model'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', updateSummary);
+            if (el) el.addEventListener('input', updateSummary);
+        });
+
+        // ===== Update Summary =====
+        function updateSummary() {
+            // Services
+            const checked = document.querySelector('.service-option input:checked');
+            const servicesEl = document.getElementById('summary-services');
+            let subtotal = 0;
+
+            if (!checked) {
+                servicesEl.innerHTML = '<p class="text-sm text-gray-400 italic">No service selected yet</p>';
+            } else {
+                const price = parseFloat(checked.dataset.price) || 0;
+                subtotal = price;
+                servicesEl.innerHTML = `<div class="flex items-start justify-between mb-1">
+                    <p class="text-sm font-medium text-gray-900">${checked.value}</p>
+                    <span class="text-sm font-bold text-gray-900 ml-2 whitespace-nowrap">${price > 0 ? '$' + price.toFixed(2) : 'Free'}</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">30-minute appointment</p>`;
+            }
+
+            // Date & Time
+            const datetimeEl = document.getElementById('summary-datetime');
+            if (selectedDate || selectedTime) {
+                let dateStr = '';
+                if (selectedDate) {
+                    const d = new Date(selectedDate + 'T12:00:00');
+                    dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+                if (selectedTime) dateStr += ' at ' + selectedTime;
+                datetimeEl.innerHTML = `<span class="material-symbols-outlined text-base mr-2 text-primary">calendar_today</span><span class="font-medium">${dateStr.trim()}</span>`;
+            } else {
+                datetimeEl.innerHTML = '<span class="material-symbols-outlined text-base mr-2 text-primary">calendar_today</span><span class="text-gray-400 italic">Not selected</span>';
+            }
+
+            // Vehicle
+            const year = document.getElementById('year').value;
+            const make = document.getElementById('make').value;
+            const model = document.getElementById('model').value;
+            const vehicleEl = document.getElementById('summary-vehicle');
+            const vehicleStr = [year, make, model].filter(Boolean).join(' ');
+            if (vehicleStr) {
+                vehicleEl.innerHTML = `<span class="material-symbols-outlined text-base mr-2 text-primary">directions_car</span><span>${vehicleStr}</span>`;
+            } else {
+                vehicleEl.innerHTML = '<span class="material-symbols-outlined text-base mr-2 text-primary">directions_car</span><span class="text-gray-400 italic">Not entered</span>';
+            }
+
+            // Totals
+            const tax = subtotal * 0.06;
+            const total = subtotal + tax;
+            document.getElementById('summary-subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('summary-tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('summary-total').textContent = '$' + total.toFixed(2);
+
+            // Mobile summary
+            const mobileService = document.getElementById('mobile-summary-service');
+            const mobileTotal = document.getElementById('mobile-summary-total');
+            if (mobileService) {
+                mobileService.textContent = checked ? checked.value : 'No service selected';
+            }
+            if (mobileTotal) {
+                mobileTotal.textContent = '$' + total.toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>

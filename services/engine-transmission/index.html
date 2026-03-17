@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Engine & Transmission - Larry's Chevron | Nampa, ID</title>
+    <meta name="description" content="Engine and transmission repair at Larry's Chevron in Nampa, Idaho. Factory scheduled maintenance, engine replacement, transmission service, and complete lubrication." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0072CE",
+                        secondary: "#D41E2D",
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#111827",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "accent-dark": "#374151"
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.375rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .mobile-menu.open { max-height: 400px; }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-background-light text-text-light font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-surface-light/95 backdrop-blur-sm border-b border-gray-200 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2">
+                    <img src="/images/logo.png" alt="Larry's Chevron" class="h-14 w-auto" />
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/">Home</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#services">Services</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#about">About Us</a>
+                    <a class="text-gray-600 hover:text-primary font-medium transition-colors" href="/#contact">Contact</a>
+                    <a class="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded shadow-lg font-bold uppercase tracking-wide transition-all transform hover:-translate-y-0.5" href="/book/">Book Appointment</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuToggle" class="text-gray-600 hover:text-primary focus:outline-none" aria-label="Toggle menu">
+                        <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/">Home</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#services">Services</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#about">About Us</a>
+                <a class="block text-gray-700 hover:text-primary font-medium py-2" href="/#contact">Contact</a>
+                <a class="block bg-primary hover:bg-blue-700 text-white px-5 py-3 rounded shadow-lg font-bold uppercase tracking-wide text-center transition-all" href="/book/">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Service Hero -->
+    <section class="bg-zinc-900 text-white py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-2 text-sm text-gray-400 mb-4">
+                <a href="/" class="hover:text-white transition-colors">Home</a>
+                <span>/</span>
+                <a href="/#services" class="hover:text-white transition-colors">Services</a>
+                <span>/</span>
+                <span class="text-white">Engine &amp; Transmission</span>
+            </div>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-primary rounded-xl flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl">oil_barrel</span>
+                </div>
+                <div>
+                    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold uppercase">Engine &amp; Transmission</h1>
+                    <p class="text-gray-400 mt-1">The heart of your vehicle, maintained by experts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Left Content -->
+                <div class="lg:col-span-2 space-y-12">
+                    <div class="fade-up">
+                        <h2 class="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-4 uppercase">Keeping Your Engine Running Strong</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-4">Your engine and transmission are the most critical mechanical components in your vehicle. Regular maintenance prevents costly breakdowns, and when problems do arise, you need a shop you can trust. Larry's Chevron has been handling engine and transmission work for Nampa drivers for over 30 years.</p>
+                        <p class="text-gray-600 text-lg leading-relaxed">Whether it's a routine oil change, factory scheduled maintenance, or a complete engine replacement, our certified technicians treat every vehicle with the same attention to detail and care.</p>
+                    </div>
+
+                    <!-- Services List -->
+                    <div class="fade-up">
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-6 uppercase">What We Offer</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-surface-light rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="material-symbols-outlined text-primary">event_note</span>
+                                    <h4 class="font-bold text-gray-900">Factory Scheduled Maintenance</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">We follow your manufacturer's recommended service schedule — oil changes, filter replacements, fluid checks, and all required maintenance intervals.</p>
+                            </div>
+                            <div class="bg-surface-light rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="material-symbols-outlined text-primary">manufacturing</span>
+                                    <h4 class="font-bold text-gray-900">Engine Replacement</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">When repair isn't enough, we handle complete engine replacement with quality parts and professional installation.</p>
+                            </div>
+                            <div class="bg-surface-light rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="material-symbols-outlined text-primary">sync</span>
+                                    <h4 class="font-bold text-gray-900">Transmission Service &amp; Repair</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">Transmission fluid changes, filter replacement, diagnostics, and complete transmission repair for both automatic and manual vehicles.</p>
+                            </div>
+                            <div class="bg-surface-light rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="material-symbols-outlined text-primary">oil_barrel</span>
+                                    <h4 class="font-bold text-gray-900">Complete Lubrication Service</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">Full-service oil changes with synthetic or conventional options, chassis lubrication, and complete fluid top-offs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning Signs -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 md:p-8 fade-up">
+                        <h3 class="font-display text-xl font-bold text-amber-900 mb-4 uppercase flex items-center gap-2">
+                            <span class="material-symbols-outlined text-amber-600">warning</span>
+                            Signs of Engine or Transmission Trouble
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-amber-800">
+                                <span class="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0"></span>
+                                <span>Unusual knocking, ticking, or grinding noises from the engine</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-amber-800">
+                                <span class="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0"></span>
+                                <span>Transmission slipping, hard shifting, or delayed engagement</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-amber-800">
+                                <span class="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0"></span>
+                                <span>Oil spots or fluid leaks under your vehicle</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-amber-800">
+                                <span class="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0"></span>
+                                <span>Reduced fuel economy or loss of power</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-amber-800">
+                                <span class="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0"></span>
+                                <span>Check engine light or transmission warning light illuminated</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-primary rounded-xl p-6 text-white text-center fade-up">
+                        <span class="material-symbols-outlined text-5xl mb-3">oil_barrel</span>
+                        <h3 class="font-display text-xl font-bold uppercase mb-2">Due for an Oil Change?</h3>
+                        <p class="text-blue-100 text-sm mb-6">Regular oil changes are the best thing you can do for your engine. Book yours today.</p>
+                        <a href="/book/" class="block bg-white text-primary font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all text-sm uppercase tracking-wide">Book Oil Change</a>
+                    </div>
+
+                    <div class="bg-surface-light rounded-xl border border-gray-100 p-6 fade-up">
+                        <h3 class="font-display text-lg font-bold text-gray-900 uppercase mb-4">Questions?</h3>
+                        <p class="text-gray-600 text-sm mb-4">Engine and transmission work varies widely in scope. Give us a call to discuss your vehicle's symptoms and we'll give you an honest assessment.</p>
+                        <a href="tel:2084667314" class="flex items-center justify-center gap-2 bg-secondary hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-sm">
+                            <span class="material-symbols-outlined">call</span>
+                            (208) 466-7314
+                        </a>
+                    </div>
+
+                    <div class="bg-surface-light rounded-xl border border-gray-100 p-6 fade-up">
+                        <h3 class="font-display text-lg font-bold text-gray-900 uppercase mb-4">Other Services</h3>
+                        <ul class="space-y-3">
+                            <li><a href="/services/brakes-suspension/" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors text-sm font-medium"><span class="material-symbols-outlined text-base">build_circle</span>Brakes &amp; Suspension</a></li>
+                            <li><a href="/services/gas-station/" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors text-sm font-medium"><span class="material-symbols-outlined text-base">local_gas_station</span>Full Service Gas Station</a></li>
+                            <li><a href="/services/heating-cooling/" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors text-sm font-medium"><span class="material-symbols-outlined text-base">ac_unit</span>Heating &amp; Cooling</a></li>
+                            <li><a href="/services/electrical-diagnostics/" class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors text-sm font-medium"><span class="material-symbols-outlined text-base">settings_input_component</span>Electrical &amp; Diagnostics</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="bg-primary py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold leading-tight text-white sm:leading-tight uppercase">Keep your engine in peak condition.</h2>
+                    <p class="mt-2 text-lg text-blue-100">From routine maintenance to major repairs, we've got the expertise you need.</p>
+                </div>
+                <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 md:mt-0 md:ml-4">
+                    <a class="inline-flex items-center justify-center gap-2 bg-white text-primary text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg hover:shadow-2xl hover:bg-gray-50 transition-all" href="tel:2084667314">
+                        <span class="material-symbols-outlined">call</span>
+                        (208) 466-7314
+                    </a>
+                    <a class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-red-700 text-white text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all" href="/book/">
+                        Book Online
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white" id="contact">
+        <div class="relative overflow-hidden">
+            <div class="absolute inset-0">
+                <img alt="Gas station background" class="w-full h-full object-cover opacity-20 grayscale" src="/images/station-exterior.jpg" />
+                <div class="absolute inset-0 bg-gray-900/80"></div>
+            </div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4"><img src="/images/logo.png" alt="Larry's Chevron" class="h-10 w-auto" /></div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Serving Nampa, Idaho for over 30 years. A full-service fuel station and automotive repair facility you can trust.</p>
+                    </div>
+                    <div>
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-secondary mr-3 mt-1">schedule</span>
+                            <div>
+                                <h3 class="text-lg font-display font-bold mb-3 uppercase">Hours</h3>
+                                <ul class="text-gray-400 space-y-2 text-sm">
+                                    <li class="flex justify-between gap-4"><span>Monday – Friday</span><span class="text-white">8am – 5pm</span></li>
+                                    <li class="flex justify-between gap-4"><span>Saturday</span><span class="text-white">Closed</span></li>
+                                    <li class="flex justify-between gap-4"><span>Sunday</span><span class="text-white">Closed</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-secondary mr-3 mt-1">call</span>
+                            <div>
+                                <h3 class="text-lg font-display font-bold mb-3 uppercase">Contact</h3>
+                                <a href="tel:2084667314" class="text-2xl font-bold text-white hover:text-primary transition-colors block mb-2">(208) 466-7314</a>
+                                <a href="mailto:larryscheveron633@gmail.com" class="text-primary hover:text-blue-400 text-sm font-medium block mb-2">larryscheveron633@gmail.com</a>
+                                <p class="text-gray-400 text-sm">Call or email us for a quote on your automotive repair needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-start">
+                            <span class="material-symbols-outlined text-secondary mr-3 mt-1">location_on</span>
+                            <div>
+                                <h3 class="text-lg font-display font-bold mb-3 uppercase">Address</h3>
+                                <address class="text-white not-italic text-sm leading-relaxed">404 12th Ave Rd<br />Nampa, ID 83686</address>
+                                <a class="text-primary hover:text-blue-400 text-sm mt-2 inline-block font-medium" href="https://www.google.com/maps/search/?api=1&query=404+12th+Ave+Rd+Nampa+ID+83686" target="_blank" rel="noopener noreferrer">Get Directions &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-black py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+                <p>&copy; 2026 Larry's Chevron. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                    <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            menuIcon.textContent = mobileMenu.classList.contains('open') ? 'close' : 'menu';
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { mobileMenu.classList.remove('open'); menuIcon.textContent = 'menu'; });
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
